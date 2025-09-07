@@ -1,4 +1,4 @@
-package uk.ac.sheffield.bandproject.Model;
+package com.rv.band_manager.Model;
 
 // Enum to define the various roles a user can have within the system
 public enum Role {

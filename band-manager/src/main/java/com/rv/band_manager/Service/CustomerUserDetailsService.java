@@ -1,5 +1,7 @@
 package com.rv.band_manager.Service;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rv.band_manager.Model.User;
 import com.rv.band_manager.Repository.UserRepository;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.naming.NameNotFoundException;
 
@@ -23,11 +26,17 @@ public class CustomerUserDetailsService implements UserDetailsService {
         // Fetch user from the database
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found" + username));
+
+        //Map the user's roles to a list of GrantedAuthority objects
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                .collect(Collectors.toList());
+
         // Return Spring Security User object
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                new ArrayList<>()
+                authorities
         );
     }
 }
