@@ -9,8 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import uk.ac.sheffield.bandproject.Service.CustomerUserDetailsService;
-import uk.ac.sheffield.bandproject.Service.UserServiceImpl;
+import com.rv.band_manager.Service.CustomerUserDetailsService;
+import com.rv.band_manager.Service.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -21,28 +21,29 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
+   
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/register", "/login").permitAll()
-                        .requestMatchers("/dashboard").authenticated()
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginProcessingUrl("/login")
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true) // Redirect to dashboard on success
-                        .failureHandler(authenticationFailureHandler())
-                        .permitAll()
-                )
-                .logout((logout) -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .permitAll()
-                );
+            .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/register", "/login").permitAll()
+                .requestMatchers("/dashboard").authenticated()
+                .anyRequest().authenticated()
+            )
+            .formLogin((form) -> form
+                .loginProcessingUrl("/login")
+                .loginPage("/login")
+                .defaultSuccessUrl("/my-account", true) // Redirect to dashboard on success
+                .failureHandler(authenticationFailureHandler())
+                .permitAll()
+            )
+            .logout((logout) -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .permitAll()
+            );
         return http.build();
     }
 

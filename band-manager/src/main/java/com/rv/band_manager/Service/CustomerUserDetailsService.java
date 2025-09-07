@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import uk.ac.sheffield.bandproject.Model.User;
-import uk.ac.sheffield.bandproject.Repository.UserRepository;
+import com.rv.band_manager.Model.User;
+import com.rv.band_manager.Repository.UserRepository;
 import java.util.*;
 
 import javax.naming.NameNotFoundException;

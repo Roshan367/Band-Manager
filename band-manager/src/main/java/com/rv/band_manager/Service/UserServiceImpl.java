@@ -1,9 +1,11 @@
 package com.rv.band_manager.Service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
-import uk.ac.sheffield.bandproject.Model.User;
-import uk.ac.sheffield.bandproject.Repository.UserRepository;
+import com.rv.band_manager.Model.User;
+import com.rv.band_manager.Repository.UserRepository;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ public class UserServiceImpl{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;

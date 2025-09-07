@@ -28,6 +28,14 @@
       <button type="submit" class="btn btn-primary btn-block">Login</button>
     </div>
 
+    <div class="text-center">
+      <p>Not a Member?</p>
+      <div class="d-grid mx-auto">
+        <button type="button" class="btn btn-secondary btn-block"
+                onclick="window.location.href='/register'">Sign Up Here</button>
+      </div>
+    </div>    
+
     <!-- Error message for login failure -->
     <div th:if="${param.error}" class="alert alert-danger text-center" role="alert"
          th:text="${param.error}"></div>

@@ -27,13 +27,22 @@
       <input type="email" id="email" th:field="*{email}" class="form-control" required/>
       <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
     </div>
-
-    <button type="submit" class="btn btn-primary btn-block">Register</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </div>
+    
+    <div class="text-center">
+      <p>Already a Member?</p>
+      <div class="d-grid mx-auto">
+        <button type="button" class="btn btn-secondary btn-block"
+            onclick="window.location.href='/login'">Sign Up Here</button>
+      </div>
+    </div> 
+  
+    <div th:if="${errorMessage}" class="alert alert-danger mt-3" role="alert">
+      <p th:text="${errorMessage}"></p>
+    </div>
   </form>
-
-  <div th:if="${errorMessage}" class="alert alert-danger mt-3" role="alert">
-    <p th:text="${errorMessage}"></p>
-  </div>
 </div>
 </body>
 </html>

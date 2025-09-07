@@ -1,7 +1,7 @@
 package com.rv.band_manager.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uk.ac.sheffield.bandproject.Model.User;
+import com.rv.band_manager.Model.User;
 
 import java.util.Optional;
 
