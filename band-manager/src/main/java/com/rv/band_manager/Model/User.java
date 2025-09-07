@@ -1,4 +1,4 @@
-package uk.ac.sheffield.bandproject.Model;
+package com.rv.band_manager.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
