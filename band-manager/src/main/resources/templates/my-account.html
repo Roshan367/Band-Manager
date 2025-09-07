@@ -1,10 +1,22 @@
-<html>
-  <head>
-    <title>My Account</title>
-  </head>
+<!DOCTYPE html>
 
-  <body>
-    <p>Dashboard</p>
-  </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+
+<body>
+<div class="container mt-5">
+    <h1 class="text-container">Welcome to the Dashboard</h1>
+    <p class="text-center">Hello,<span th:text="${username}"></span></p>
+    <p class="text-center">This page is only accessible to logged-in users.</p>
+
+    <form th:action="@{/logout}" method="post" class="text-center mt-4">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+</div>
+</body>
 </html>
-
