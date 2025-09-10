@@ -54,7 +54,7 @@ public class BandController {
 
 
         // Retrieve all users assigned to the Training Band
-        List<User> users = userService.getUsersByBand("Training");
+        List<User> users = userService.getUsersByBand("training-band");
         model.addAttribute("users", users); // Add the users to the model for rendering
         return "director/training-band"; // Render the training-band page
     }
@@ -76,7 +76,7 @@ public class BandController {
 
 
         // Retrieve all users assigned to the Senior Band
-        List<User> users = userService.getUsersByBand("Senior");
+        List<User> users = userService.getUsersByBand("senior-band");
         model.addAttribute("users", users); // Add the users to the model for rendering
         return "director/senior-band"; // Render the senior-band page
     }
