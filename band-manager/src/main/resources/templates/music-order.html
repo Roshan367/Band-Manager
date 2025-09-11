@@ -7,7 +7,9 @@
   <meta name="_csrf" th:content="${_csrf.token}">
   <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
-<body>
+<body class="font-monospace">
+<div th:replace="~{fragments/headerForm.html :: header}"></div>
+
 <div class="container mt-5">
   <h1 class="text-center">Music Order Details</h1>
   <div th:if="${musicOrder==null}">
