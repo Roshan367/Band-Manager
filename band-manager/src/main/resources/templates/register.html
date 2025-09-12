@@ -20,7 +20,7 @@
       <h2 class="text-center mb-4">Sign Up</h2>
 
       <!-- Sign Up Form -->
-      <form th:action="@{/register}" th:object="${user}" method="post" class="border p-4 rounded bg-light">
+      <form th:action="@{/register}" th:object="${user}" method="post" class="border border-dark p-4 rounded bg-light">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
 
@@ -49,12 +49,12 @@
           <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="text-danger"></div>
         </div>
         <div class="d-grid mx-auto mb-3">
-          <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+          <button type="submit" class="btn btn-outline-dark btn-block">Sign Up</button>
         </div>
         <div class="text-center">
           <p>Already got an account?</p>
           <div class="d-grid mx-auto">
-            <button type="button" class="btn btn-secondary btn-block"
+            <button type="button" class="btn btn-outline-dark btn-block"
                     onclick="window.location.href='/login'">Go to Login</button>
           </div>
         </div>

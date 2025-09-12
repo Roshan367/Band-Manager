@@ -74,7 +74,7 @@
           <form th:action="@{/music-order/{musicOrderId}/ready(musicOrderId=${musicOrder.id})}"
                 th:method="post" th:if="${musicOrder.status != 'FULFILLED' && musicOrder.status != 'READY' }">
             <input type="hidden" name="musicOrderId" th:value="${musicOrder.id}" />
-            <button type="submit" class="btn btn-success">Ready Music Order</button>
+            <button type="submit" class="btn btn-outline-dark">Ready Music Order</button>
           </form>
         </div>
       <h1>Music Part List</h1>
