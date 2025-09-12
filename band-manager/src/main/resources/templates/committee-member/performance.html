@@ -17,7 +17,7 @@
   <h1 class="text-center">Performance Details</h1>
   <div th:if="${performance == null}">
     <p>Error: Performance not found!</p>
-    <a class="btn btn-primary" href="/committee-member/performance">Back to performance</a>
+    <a class="btn btn-outline-dark" href="/committee-member/performance">Back to performance</a>
   </div>
   <div th:unless="${performance == null}">
     <div class="card">
@@ -89,14 +89,14 @@
               </li>
             </ul>
           </div>
-          <button type="button" id="updatePerformanceButton" class="btn btn-primary mt-2"
+          <button type="button" id="updatePerformanceButton" class="btn btn-outline-dark mt-2"
                   th:data-id="${performance.id}">Update Performance</button>
         </form>
         <div class="d-flex justify-content-between mt-4">
-          <button type="button" id="deletePerformanceButton" class="btn btn-danger"
+          <button type="button" id="deletePerformanceButton" class="btn btn-outline-dark"
                   th:data-id="${performance.id}">Delete Performance</button>
         </div>
-        <a class="btn btn-primary mt-4" href="/committee-member/performance">Back to All Performances</a>
+        <a class="btn btn-outline-dark mt-4" href="/committee-member/performance">Back to All Performances</a>
       </div>
     </div>
   </div>

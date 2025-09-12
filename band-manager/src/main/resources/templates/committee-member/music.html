@@ -80,7 +80,7 @@
           <!-- Button to fulfill the order -->
           <form th:action="@{/committee-member/music-order/fulfill}" th:method="post">
             <input type="hidden" name="musicOrderId" th:value="${musicOrder.id}" />
-            <button type="submit" class="btn btn-success">Fulfill</button>
+            <button type="submit" class="btn btn-outline-dark">Fulfill</button>
           </form>
         </td>
       </tr>

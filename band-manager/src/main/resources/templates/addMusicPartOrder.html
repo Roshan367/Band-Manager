@@ -32,12 +32,12 @@
                 <input type="text" class="form-control" id="musicPartName" name="musicPartName"
                        th:value="${musicPartName}" required>
             </div>
-            <button type="submit" class="btn btn-primary">Add Music Part to Order</button>
+            <button type="submit" class="btn btn-outline-dark">Add Music Part to Order</button>
         </form>
     </div>
 
     <div class="mt-2">
-        <a class="btn btn-primary"
+        <a class="btn btn-outline-dark"
            th:href="@{/music-order/{musicOrderId}(musicOrderId=${musicOrder.id})}">Back to Music Order</a>
     </div>
 

@@ -17,8 +17,8 @@
             <input type="text" class="form-control" id="bandName" name="bandName"
                    th:value="${bandName}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Put Music in Practice</button>
-        <a class="btn btn-primary"
+        <button type="submit" class="btn btn-outline-dark">Put Music in Practice</button>
+        <a class="btn btn-outline-dark"
            th:href="@{/committee-member/music-set/{musicSetId}(musicSetId=${musicSet.id})}">Back to Music Set</a>
     </form>
 </div>

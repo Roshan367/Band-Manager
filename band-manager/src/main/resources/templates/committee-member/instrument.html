@@ -16,7 +16,7 @@
   <h1 class="text-center">Instrument Details</h1>
   <div th:if="${instrument==null}">
     <p>Error: Instrument not found!</p>
-    <a class="btn btn-primary" href="/committee-member/items">Back to items</a>
+    <a class="btn btn-outline-dark" href="/committee-member/items">Back to items</a>
   </div>
   <div th:unless="${instrument==null}">
     <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -47,14 +47,14 @@
                    class="form-control" required>
           </div>
 
-          <button type="button" id="updateInstrumentButton" class="btn btn-primary mt-2"
+          <button type="button" id="updateInstrumentButton" class="btn btn-outline-dark mt-2"
                   th:data-id="${instrument.id}">Update Instrument</button>
         </form>
         <div class="d-flex justify-content-between mt-4">
-          <button type="button" id="deleteInstrumentButton" class="btn btn-danger"
+          <button type="button" id="deleteInstrumentButton" class="btn btn-outline-dark"
                   th:data-id="${instrument.id}">Delete Instrument</button>
 
-          <a class="btn btn-primary" href="/committee-member/music">Back to Music</a>
+          <a class="btn btn-outline-dark" href="/committee-member/items">Back to Items</a>
         </div>
       </div>
     </div>

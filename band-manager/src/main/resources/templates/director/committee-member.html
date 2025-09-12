@@ -16,7 +16,7 @@
     <h1>Committee Member Details</h1>
     <div th:if="${committeeMember == null}">
         <p>Error: Committee Member not found!</p>
-        <a class="btn btn-primary" href="/director/committee">Back to Committee Members</a>
+        <a class="btn btn-outline-dark" href="/director/committee">Back to Committee Members</a>
     </div>
     <div th:unless="${committeeMember == null}">
         <div class="card">
@@ -26,9 +26,9 @@
                 <p>Name - <span th:text="${committeeMember.fullName}"></span></p>
                 <p>Phone Number - <span th:text="${committeeMember.phoneNumber}"></span></p>
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" id="removeCommitteeMemberButton" class="btn btn-danger"
+                    <button type="button" id="removeCommitteeMemberButton" class="btn btn-outline-dark"
                             th:data-id="${committeeMember.id}">Remove User From Committee Member</button>
-                    <a class="btn btn-primary" th:href="@{/director/committee}">Back to Committee Members</a>
+                    <a class="btn btn-outline-dark" th:href="@{/director/committee}">Back to Committee Members</a>
                 </div>
             </div>
         </div>

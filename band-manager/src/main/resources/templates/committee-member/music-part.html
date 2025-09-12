@@ -16,7 +16,7 @@
     <h1 class="text-center">Music Part Details</h1>
     <div th:if="${musicPart == null}">
         <p>Error: Music Part not found!</p>
-        <a class="btn btn-primary"
+        <a class="btn btn-outline-dark"
            href="/committee-member/music">
             Back to music
         </a>
@@ -32,11 +32,11 @@
                                class="form-control" required>
                     </div>
 
-                    <button type="button" id="updateMusicPartButton" class="btn btn-primary"
+                    <button type="button" id="updateMusicPartButton" class="btn btn-outline-dark"
                             th:data-musicPartId="${musicPart.id}"
                             th:data-musicSetId="${musicSet.id}">Update Music Part</button>
                 </form>
-                    <a class="btn btn-primary"
+                    <a class="btn btn-outline-dark"
                        th:href="@{/committee-member/music-set/{musicSetId}(musicSetId=${musicSet.id})}">
                         Back to Music Set
                     </a>

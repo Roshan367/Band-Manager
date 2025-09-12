@@ -16,7 +16,7 @@
     <h1 class="text-center">Miscellaneous Details</h1>
     <div th:if="${miscellaneous==null}">
         <p>Error: Miscellaneous not found!</p>
-        <a class="btn btn-primary" href="/committee-member/items">Back to items</a>
+        <a class="btn btn-outline-dark" href="/committee-member/items">Back to items</a>
     </div>
     <div th:unless="${miscellaneous==null}">
         <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -53,14 +53,14 @@
                                class="form-control">
                     </div>
 
-                    <button type="button" id="updateMiscellaneousButton" class="btn btn-primary mt-2"
+                    <button type="button" id="updateMiscellaneousButton" class="btn btn-outline-dark mt-2"
                             th:data-id="${miscellaneous.id}">Update Miscellaneous</button>
                 </form>
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" id="deleteMiscellaneousButton" class="btn btn-danger"
+                    <button type="button" id="deleteMiscellaneousButton" class="btn btn-outline-dark"
                             th:data-id="${miscellaneous.id}">Delete Miscellaneous</button>
 
-                    <a class="btn btn-primary" href="/committee-member/items">Back to Items</a>
+                    <a class="btn btn-outline-dark" href="/committee-member/items">Back to Items</a>
                 </div>
             </div>
         </div>

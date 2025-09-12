@@ -16,7 +16,7 @@
     <h1>Music Order Details</h1>
     <div th:if="${musicOrder==null}">
         <p>Error: Music Order not found!</p>
-        <a class="btn btn-primary"
+        <a class="btn btn-outline-dark"
            th:href="@{/committee-member/music}">
             Back to Music
         </a>
@@ -29,7 +29,7 @@
                 <h5 class="card-title">Music Order Information</h5>
                 <p><strong>Music Order Owner Name: </strong><span th:text="${musicOrder.owner.fullName}"></span> </p>
                 <p><strong>Music Order Date: </strong><span th:text="${musicOrder.date}"></span> </p>
-                <a class="btn btn-primary"
+                <a class="btn btn-outline-dark"
                    th:href="@{/committee-member/music}">
                     Back to Music
                 </a>

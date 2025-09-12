@@ -16,7 +16,7 @@
     <h1>Training Band Member Details</h1>
     <div th:if="${bandMember==null}">
         <p>Error: bandMember not found!</p>
-        <a class="btn btn-primary" href="/director/training-band">Back to Training Band Members</a>
+        <a class="btn btn-outline-dark" href="/director/training-band">Back to Training Band Members</a>
     </div>
     <div th:unless="${bandMember==null}">
         <div class="card">
@@ -35,9 +35,9 @@
                             th:text="${bandMember.getEffectivePhoneNumber() + '(Parent Phone Number)'}"></span></p>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" id="deleteTrainingBandMemberButton" class="btn btn-danger"
+                    <button type="button" id="deleteTrainingBandMemberButton" class="btn btn-outline-dark"
                             th:data-id="${bandMember.id}">Delete Member From Training Band</button>
-                    <a class="btn btn-primary" href="/director/training-band">Back to Training Band Members</a>
+                    <a class="btn btn-outline-dark" href="/director/training-band">Back to Training Band Members</a>
                 </div>
             </div>
         </div>

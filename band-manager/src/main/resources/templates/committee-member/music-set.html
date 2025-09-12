@@ -16,7 +16,7 @@
     <h1 class="text-center">Music Set Details</h1>
     <div th:if="${musicSet==null}">
         <p>Error: Music Set not found!</p>
-        <a class="btn btn-primary" href="/committee-member/music">Back to music</a>
+        <a class="btn btn-outline-dark" href="/committee-member/music">Back to music</a>
     </div>
     <div th:unless="${musicSet==null}">
         <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -55,22 +55,22 @@
                         </div>
                     </div>
 
-                    <button type="button" id="updateMusicSetButton" class="btn btn-primary mt-2"
+                    <button type="button" id="updateMusicSetButton" class="btn btn-outline-dark mt-2"
                             th:data-id="${musicSet.id}">Update Music Set</button>
                 </form>
                 <div class="d-flex justify-content-between mt-4">
-                    <a class="btn btn-primary" href="/committee-member/music">Back to Music</a>
+                    <a class="btn btn-outline-dark" href="/committee-member/music">Back to Music</a>
 
-                    <a class="btn btn-primary"
+                    <a class="btn btn-outline-dark"
                        th:href="@{/committee-member/music-set/{musicSetId}/music-part/new(musicSetId=${musicSet.id})}">
                         Add Music Part</a>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                    <a class="btn btn-primary"
+                    <a class="btn btn-outline-dark"
                        th:href="@{/committee-member/music-set/{musicSetId}/practice/new(musicSetId=${musicSet.id})}">
                         Put Music Set in Practice</a>
 
-                    <button type="button" id="deletePracticeButton" class="btn btn-danger"
+                    <button type="button" id="deletePracticeButton" class="btn btn-outline-dark"
                             th:data-id="${musicSet.id}">Put Music Set in Storage</button>
                 </div>
             </div>

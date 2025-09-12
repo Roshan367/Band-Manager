@@ -16,7 +16,7 @@
     <h1>Senior Band Member Details</h1>
     <div th:if="${bandMember==null}">
         <p>Error: bandMember not found!</p>
-        <a class="btn btn-primary" href="/director/senior-band">Back to Senior Band Members</a>
+        <a class="btn btn-outline-dark" href="/director/senior-band">Back to Senior Band Members</a>
     </div>
     <div th:unless="${bandMember==null}">
         <div class="card">
@@ -35,9 +35,9 @@
                             th:text="${bandMember.getEffectivePhoneNumber() + '(Parent Phone Number)'}"></span></p>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" id="deleteSeniorBandMemberButton" class="btn btn-danger"
+                    <button type="button" id="deleteSeniorBandMemberButton" class="btn btn-outline-dark"
                             th:data-id="${bandMember.id}">Delete Member From Senior Band</button>
-                    <a class="btn btn-primary" href="/director/senior-band">Back to Senior Band Members</a>
+                    <a class="btn btn-outline-dark" href="/director/senior-band">Back to Senior Band Members</a>
                 </div>
             </div>
         </div>
