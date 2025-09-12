@@ -9,15 +9,16 @@
   <div class="container-fluid flex-grow-1 d-flex align-items-center justify-content-center">
 
     <!-- Left Section -->
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
     <div class="col">
-      <h1 class="display-1 text-start fw-semibold">Sludgate<br>Brass<br>Band</h1>
+      <h1 class="display-1 text-start fw-semibold mt-5" style="position: relative; top: 100px;">Sludgate<br>Brass<br>Band</h1>
+      <img th:src="@{/images/jazz_band_2.jpg}" alt="Brass band silhouette image" width="350" height="280">
     </div>
 
     <!-- Right Section -->
     <div class="col">
-      <h2 class="text-center mb-4">Sign Up</h2>
+      <h2 class="text-center mb-2">Sign Up</h2>
 
       <!-- Sign Up Form -->
       <form th:action="@{/register}" th:object="${user}" method="post" class="border border-dark p-4 rounded bg-light">
