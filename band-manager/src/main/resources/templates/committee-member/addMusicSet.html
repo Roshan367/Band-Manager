@@ -12,7 +12,8 @@
   <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
     <p th:text="${errorMessage}"></p>
   </div>
-
+  <div class="card border border-dark">
+  <div class="card-body">  
   <form th:action="@{/committee-member/music-set}" method="post">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
@@ -34,9 +35,13 @@
       <input type="checkbox" id="suitableForTraining" name="suitableForTraining"
              th:cheked="${suitableForTraining}">
     </div>
-    <button type="submit" class="btn btn-outline-dark">Add Music Set</button>
-    <a class="btn btn-outline-dark" th:href="@{/committee-member/music}">Back to Music</a>
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" class="btn btn-outline-dark">Add Music Set</button>
+      <a class="btn btn-outline-dark" th:href="@{/committee-member/music}">Back to Music</a>
+    </div>
   </form>
+  </div>
+  </div>
 </div>
 
 

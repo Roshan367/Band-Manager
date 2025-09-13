@@ -12,7 +12,8 @@
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <p th:text="${errorMessage}"></p>
     </div>
-
+    <div class="card border border-dark">
+    <div class="card-body">
     <div class="mt-2">
         <h3>Add By Email</h3>
         <form th:action="@{/director/training-band}" method="post">
@@ -33,14 +34,14 @@
                 <input type="text" class="form-control" id="fullName" name="fullName"
                        th:value="${fullName}" required>
             </div>
+            <div class="d-flex justify-content-between mt-4">
             <button type="submit" class="btn btn-outline-dark">Add User to Training Band</button>
+            <a class="btn btn-outline-dark" th:href="@{/director/training-band}">Back to Training Band Members</a>
+            </div>
         </form>
     </div>
-
-    <div class="mt-2">
-        <a class="btn btn-outline-dark" th:href="@{/director/training-band}">Back to Training Band Members</a>
     </div>
-
+    </div>
 </div>
 </body>
 </html>

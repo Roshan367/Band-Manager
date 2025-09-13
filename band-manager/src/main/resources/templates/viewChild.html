@@ -8,14 +8,16 @@
 <body class="font-monospace">
 <div th:replace="~{fragments/headerForm.html :: header}"></div>
 <div class="container mt-5">
-    <h1>Add Child Member</h1>
+    <h1>View Child Member</h1>
+    <div class="card border border-dark">
+    <div class="card-body">
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <p th:text="${errorMessage}"></p>
     </div>
     <div th:if="${children.size() == 0}" >
         <p>No children found</p>
     </div>
-    <div th:unless="${children.size() == 0}">
+        <div th:unless="${children.size() == 0}">
         <table class="table table-bordered table-stripped">
             <thead>
             <tr>
@@ -41,7 +43,8 @@
     <div class="mt-2">
         <a class="btn btn-outline-dark" th:href="@{/performance}">Back to Performance</a>
     </div>
-
+    </div>
+    </div>
 </div>
 </body>
 </html>

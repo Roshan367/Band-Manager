@@ -20,10 +20,10 @@
     <a class="btn btn-outline-dark" href="/committee-member/performance">Back to performance</a>
   </div>
   <div th:unless="${performance == null}">
-    <div class="card">
+    <div class="card border border-dark">
       <div class="card-body">
         <h3 class="card-title">Performance Information</h3>
-        <form id="updatePerformanceForm" class="mb-4">
+        <form id="updatePerformanceForm">
           <div class="form-group mb-2">
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" th:value="${performance.date}"
@@ -78,7 +78,7 @@
                      th:checked="${trainingBand}">
             </div>
           </div>
-          <div>
+          <div class="mb-3">
             <h5 class="mt-4">Available Members</h5>
             <ul class="list-group">
               <li class="list-group-item" th:each="player : ${players}">
@@ -91,12 +91,12 @@
           </div>
           <button type="button" id="updatePerformanceButton" class="btn btn-outline-dark mt-2"
                   th:data-id="${performance.id}">Update Performance</button>
-        </form>
-        <div class="d-flex justify-content-between mt-4">
-          <button type="button" id="deletePerformanceButton" class="btn btn-outline-dark"
+          <div class="d-flex justify-content-between mt-4">
+                <button type="button" id="deletePerformanceButton" class="btn btn-outline-dark"
                   th:data-id="${performance.id}">Delete Performance</button>
-        </div>
-        <a class="btn btn-outline-dark mt-4" href="/committee-member/performance">Back to All Performances</a>
+                <a class="btn btn-outline-dark" href="/committee-member/performance">Back to All Performances</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

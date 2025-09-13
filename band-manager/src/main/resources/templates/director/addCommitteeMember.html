@@ -9,21 +9,25 @@
 <div th:replace="~{fragments/headerForm.html :: header}"></div>
 
 <div class="container mt-5 font-monospace">
-    
     <h1>Promote User to Committee Member</h1>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-        <p th:text="${errorMessage}"></p>
+      <p th:text="${errorMessage}"></p>
     </div>
-
+    <div class="card border border-dark">
+    <div class="card-body">
     <form th:action="@{/director/committee}" method="post">
         <div class="mb-3">
             <label for="email" class="form-label">Email of User</label>
             <input type="email" class="form-control" id="email" name="email"
                    th:value="${email}" required>
         </div>
+        <div class="d-flex justify-content-between mt-4">
         <button type="submit" class="btn btn-outline-dark">Promote User</button>
         <a class="btn btn-outline-dark" th:href="@{/director/committee}">Back to Committee Members</a>
+        </div>
     </form>
+    </div>
+    </div>
 </div>
 
 </body>

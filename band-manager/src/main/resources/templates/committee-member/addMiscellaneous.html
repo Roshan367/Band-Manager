@@ -12,7 +12,8 @@
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <p th:text="${errorMessage}"></p>
     </div>
-
+    <div class="card border border-dark">
+    <div class="card-body">
     <form th:action="@{/committee-member/miscellaneous}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -36,9 +37,13 @@
             <p>Leave blank if the miscellaneous item does not have to be for a specific
             instrument</p>
         </div>
-        <button type="submit" class="btn btn-outline-dark">Add Miscellaneous Item</button>
-        <a class="btn btn-outline-dark" th:href="@{/committee-member/items}">Back to Items</a>
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-outline-dark">Add Miscellaneous Item</button>
+          <a class="btn btn-outline-dark" th:href="@{/committee-member/items}">Back to Items</a>
+        </div>
     </form>
+    </div>
+    </div>
 </div>
 
 

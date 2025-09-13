@@ -12,7 +12,8 @@
   <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
     <p th:text="${errorMessage}"></p>
   </div>
-
+  <div class="card border border-dark">
+  <div class="card-body">  
   <form th:action="@{/committee-member/instrument}" method="post">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
@@ -29,9 +30,13 @@
       <input type="text" class="form-control" id="make" name="make"
              th:value="${make}" required>
     </div>
-    <button type="submit" class="btn btn-outline-dark">Add Instrument</button>
-    <a class="btn btn-outline-dark" th:href="@{/committee-member/items}">Back to Items</a>
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" class="btn btn-outline-dark">Add Instrument</button>
+      <a class="btn btn-outline-dark" th:href="@{/committee-member/items}">Back to Items</a>
+    </div>
   </form>
+  </div>
+  </div>
 </div>
 
 
