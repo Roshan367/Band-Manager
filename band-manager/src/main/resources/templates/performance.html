@@ -13,7 +13,7 @@
 <div th:replace="~{fragments/headerForm.html :: header}"></div>
 
 <div class="main-body container mt-5">
-  <h1 class="text-center">Performance Details</h1>
+  <h1>Performance Details</h1>
   <div th:if="${performance == null}">
     <p>Error: Performance not found!</p>
     <a class="btn btn-outline-dark"
@@ -22,9 +22,8 @@
     </a>
   </div>
   <div th:unless="${performance == null}">
-    <div class="card">
+    <div class="card border border-dark">
       <div class="card-body">
-        <h4 class="card-title">Performance Information</h4>
         <p><strong>Performance ID: </strong><span th:text="${performance.id}">1</span> </p>
         <p><strong>Date: </strong><span th:text="${performance.date}">1</span> </p>
         <p><strong>Time: </strong><span th:text="${performance.time}">1</span> </p>

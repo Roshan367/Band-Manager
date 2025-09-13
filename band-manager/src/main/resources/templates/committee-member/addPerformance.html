@@ -12,7 +12,8 @@
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <p th:text="${errorMessage}"></p>
     </div>
-
+    <div class="card border border-dark mt-2">
+    <div class="card-body">
     <form th:action="@{/committee-member/performance}" method="post">
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
@@ -51,9 +52,13 @@
             <input class="form-check-input" type="checkbox" id="trainingBand" name="trainingBand"
                    th:checked="${trainingBand}">
         </div>
-        <button type="submit" class="btn btn-outline-dark">Add Performance</button>
-        <a class="btn btn-outline-dark" th:href="@{/committee-member/performance}">Back to Performance</a>
-    </form>
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-outline-dark">Add Performance</button>
+          <a class="btn btn-outline-dark" th:href="@{/committee-member/performance}">Back to Performance</a>
+        </div>
+      </form>
+    </div>
+    </div>
 </div>
 
 

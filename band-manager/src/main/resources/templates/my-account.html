@@ -12,9 +12,8 @@
 <body class="font-monospace">
 <div th:replace="~{fragments/headerForm.html :: header}"></div>
 <div class="main-body mt-5">
-
-    <div class="myAccountForm">
-        <h1>My Account</h1>
+    <h1 class="text-center">My Account</h1>
+    <div class="myAccountForm border border-dark">
         <p><strong>Name: </strong><span th:text="${user.fullName}"></span> </p>
         <form id="updateAccountForm" class="mb-4">
             <div class="form-group">

@@ -12,7 +12,7 @@
 <div th:replace="~{fragments/headerForm.html :: header}"></div>
 
 <div class="container mt-5">
-  <h1 class="text-center">Music Order Details</h1>
+  <h1>Music Order Details</h1>
   <div th:if="${musicOrder==null}">
     <p>Error: Music Order not found!</p>
     <a class="btn btn-outline-dark"
@@ -38,13 +38,12 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div class="card">
+    <div class="card border border-dark">
       <div class="card-body">
-        <h5 class="card-title">Music Order Information</h5>
         <p><strong>Music Order Owner Name: </strong><span th:text="${musicOrder.owner.fullName}"></span> </p>
         <p><strong>Music Order Date: </strong><span th:text="${musicOrder.date}"></span> </p>
-        <div class="d-flex justify-content-between mt-4">
 
+        <div class="d-flex justify-content-between py-3">
           <button type="button" id="deleteMusicOrderButton" class="btn btn-outline-dark"
                   th:data-id="${musicOrder.id}"
                   th:if="${musicOrder.status != 'FULFILLED' && musicOrder.status != 'READY' && musicOrder.child == null}">
@@ -78,7 +77,7 @@
           </form>
         </div>
       <h1>Music Part List</h1>
-      <table class="table table-bordered table-stripped">
+      <table class="table table-bordered table-stripped px-5 py-2">
         <thead>
         <tr>
           <th>#</th>
