@@ -24,16 +24,15 @@
 
     </div>
     <div th:unless="${musicOrder==null}">
-        <div class="card">
+        <div class="card border border-dark">
             <div class="card-body">
-                <h5 class="card-title">Music Order Information</h5>
-                <p><strong>Music Order Owner Name: </strong><span th:text="${musicOrder.owner.fullName}"></span> </p>
-                <p><strong>Music Order Date: </strong><span th:text="${musicOrder.date}"></span> </p>
+                <p>Music Order Owner Name: <span th:text="${musicOrder.owner.fullName}"></span></p>
+                <p>Music Order Date: <span th:text="${musicOrder.date}"></span> </p>
                 <a class="btn btn-outline-dark"
                    th:href="@{/committee-member/music}">
                     Back to Music
                 </a>
-                <h1>Music Part List</h1>
+                <h5 class="mt-3">Music Part List</h5>
                 <table class="table table-bordered table-stripped">
                     <thead>
                     <tr>

@@ -40,8 +40,8 @@
 
     <div class="card border border-dark">
       <div class="card-body">
-        <p><strong>Music Order Owner Name: </strong><span th:text="${musicOrder.owner.fullName}"></span> </p>
-        <p><strong>Music Order Date: </strong><span th:text="${musicOrder.date}"></span> </p>
+        <p>Music Order Owner Name: <span th:text="${musicOrder.owner.fullName}"></span> </p>
+        <p>Music Order Date: <span th:text="${musicOrder.date}"></span> </p>
 
         <div class="d-flex justify-content-between py-3">
           <button type="button" id="deleteMusicOrderButton" class="btn btn-outline-dark"
@@ -76,7 +76,7 @@
             <button type="submit" class="btn btn-outline-dark">Ready Music Order</button>
           </form>
         </div>
-      <h1>Music Part List</h1>
+      <h5>Music Part List</h5>
       <table class="table table-bordered table-stripped px-5 py-2">
         <thead>
         <tr>

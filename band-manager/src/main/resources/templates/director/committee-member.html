@@ -21,7 +21,6 @@
     <div th:unless="${committeeMember == null}">
         <div class="card border border-dark">
             <div class="card-body">
-                <h5 class="card-title">Committee Member Information</h5>
                 <p>Email - <span th:text="${committeeMember.email}"></span></p>
                 <p>Name - <span th:text="${committeeMember.fullName}"></span></p>
                 <p>Phone Number - <span th:text="${committeeMember.phoneNumber}"></span></p>

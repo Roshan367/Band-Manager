@@ -21,7 +21,6 @@
     <div th:unless="${bandMember==null}">
         <div class="card border border-dark">
             <div class="card-body">
-                <h5 class="card-title">Training Band Member Information</h5>
                 <p>Name - <span th:text="${bandMember.fullName}"></span></p>
                 <div th:if="${bandMember.getParentRelationship() == null}">
                     <p>Email - <span th:text="${bandMember.email}"></span></p>
