@@ -24,11 +24,11 @@
   <div th:unless="${performance == null}">
     <div class="card border border-dark">
       <div class="card-body">
-        <p><strong>Performance ID: </strong><span th:text="${performance.id}">1</span> </p>
-        <p><strong>Date: </strong><span th:text="${performance.date}">1</span> </p>
-        <p><strong>Time: </strong><span th:text="${performance.time}">1</span> </p>
-        <p><strong>Location: </strong><span th:text="${performance.location}">1</span> </p>
-        <p><strong>Playlist: </strong>
+        <p>Performance ID: <span th:text="${performance.id}">1</span> </p>
+        <p>Date: <span th:text="${performance.date}">1</span> </p>
+        <p>Time: <span th:text="${performance.time}">1</span> </p>
+        <p>Location: <span th:text="${performance.location}">1</span> </p>
+        <p>Playlist: 
           <ul class="list-group">
             <li class="list-group-item" th:each="music : ${performance.musicSets}">
               <span th:text="${music.title}">Music Title</span>
@@ -38,40 +38,44 @@
             </li>
           </ul>
         </p>
-        <p><strong>Availability: </strong>
+        <p>Availability:
           <span th:if="${performanceMember.availability}">Available</span>
           <span th:unless="${performanceMember.availability}">Not Available</span>
         </p>
-        <form id="updatePerformanceMemberForm" class="mb-4">
+        
+        <form id="updatePerformanceMemberForm">
           <div class="form-group">
-            <label class="form-check-label" for="availability">Availability</label>
+            <label class="form-check-label pb-2" for="availability">Availability</label>
             <input class="form-check-input" type="checkbox" id="availability" name="availability"
                    th:checked="${performanceMember.availability}">
           </div>
-          <button type="button" id="updateChildPerformanceMemberButton" class="btn btn-outline-dark mt-2"
+          <div class="d-flex justify-content-between">
+
+          <button type="button" id="updateChildPerformanceMemberButton" class="btn btn-outline-dark"
                   th:if="${performanceMember.user.getParentRelationship() != null}"
                   th:data-id="${performanceMember.performanceMemberId.userId} + '_' +
                         ${performanceMember.performanceMemberId.bandId} + '_' + ${performance.id}">
             Update Availability
           </button>
-          <button type="button" id="updatePerformanceMemberButton" class="btn btn-outline-dark mt-2"
+          <button type="button" id="updatePerformanceMemberButton" class="btn btn-outline-dark"
                   th:unless="${performanceMember.user.getParentRelationship() != null}"
                   th:data-id="${performanceMember.performanceMemberId.userId} + '_' +
                         ${performanceMember.performanceMemberId.bandId} + '_' + ${performance.id}">
             Update Availability
           </button>
-        </form>
-        <a class="btn btn-outline-dark"
-           th:if="${performanceMember.user.getParentRelationship() != null}"
-           th:href="@{/child/{childId}/performance(childId=${performanceMember.user.id})}">
+          <a class="btn btn-outline-dark"
+          th:if="${performanceMember.user.getParentRelationship() != null}"
+          th:href="@{/child/{childId}/performance(childId=${performanceMember.user.id})}">
           Back to performance
-        </a>
+          </a>
 
-        <a class="btn btn-outline-dark"
-           th:unless="${performanceMember.user.getParentRelationship() != null}"
-           href="/performance">
+          <a class="btn btn-outline-dark"
+          th:unless="${performanceMember.user.getParentRelationship() != null}"
+          href="/performance">
           Back to performance
-        </a>
+          </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

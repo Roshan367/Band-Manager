@@ -15,7 +15,7 @@
     <h1 class="text-center">My Account</h1>
     <div class="myAccountForm border border-dark">
         <p><strong>Name: </strong><span th:text="${user.fullName}"></span> </p>
-        <form id="updateAccountForm" class="mb-4">
+        <form id="updateAccountForm">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" th:value="${user.email}"
@@ -26,12 +26,13 @@
                 <input type="text" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}"
                        class="form-control" required>
             </div>
-
+            <div class="d-flex justify-content-between">
             <button type="button" id="updateAccountButton" class="btn btn-outline-dark"
                     th:data-id="${user.id}" th:data-name="${user.fullName}"
             th:data-password="${user.password}">Update Account</button>
+            <a class="btn btn-outline-dark" href="/performance">Back to Performances</a>
+            </div>
         </form>
-        <a class="btn btn-outline-dark" href="/performance">Back to Performances</a>
     </div>
 
 
