@@ -73,15 +73,15 @@
                 </div>
             </div>
             <div th:unless="${musicSet.getBands().size()==0}" class="py-5 px-2">
-                <table class="table table-bordered table-stripped">
+                <table class="table table-secondary table-hover">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Band Name</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="band : ${bands}">
+                    <tbody class="table-group-divider">
+                    <tr class="table-light" th:each="band : ${bands}">
                         <td th:text="${band.id}"></td>
                         <td th:text="${band.name}"></td>
                     </tr>
@@ -98,15 +98,15 @@
              Add Music Part</a>
             </div>
             <div th:unless="${musicSet.getMusicParts().size()==0}" class="py-3 px-2">
-                <table class="table table-bordered table-stripped">
+                <table class="table table-secondary table-hover">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Part Name</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="musicPart : ${musicParts}">
+                    <tbody class="table-group-divider">
+                    <tr class="table-light" th:each="musicPart : ${musicParts}">
                         <th scope="col">
                             <a th:href="@{/committee-member/music-set/{musicSetId}/music-part/{musicPartId}(musicSetId=${musicSet.id}, musicPartId=${musicPart.id})}" th:text="${musicPart.id}">1</a>
                         </th>

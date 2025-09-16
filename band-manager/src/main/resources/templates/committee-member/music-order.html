@@ -33,15 +33,15 @@
                     Back to Music
                 </a>
                 <h5 class="mt-3">Music Part List</h5>
-                <table class="table table-bordered table-stripped">
+                <table class="table table-secondary table-hover">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Part Name</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="musicPart : ${musicParts}">
+                    <tbody class="table-group-divider">
+                    <tr class="table-light" th:each="musicPart : ${musicParts}">
                         <td th:text="${musicPart.id}"></td>
                         <td th:text="${musicPart.partName}"></td>
                     </tr>
