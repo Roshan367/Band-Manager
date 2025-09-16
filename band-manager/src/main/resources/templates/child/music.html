@@ -21,7 +21,9 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <div class="table-responsive px-5 py-2">
-    <h2>Music Parts Needed</h2>
+    <div class="mx-3 d-flex">
+        <h1>Music Parts Needed</h1>
+    </div>
     <table class="table table-secondary table-hover">
         <thead>
         <tr>
@@ -37,16 +39,17 @@
             <td th:text="${musicPart.musicSet.arranger}"></td>
             <td th:text="${musicPart.partName}"></td>
         </tr>
-        <p>
-            Please take note of both the music set title, arranger (If needed) and music part name
-            for when you need to order them.
-        </p>
+        
         </tbody>
     </table>
 </div>
+<p class="text-center py-2">Please take note of both the music set title, arranger (If needed) and music part name
+    for when you need to order them.</p>
 
 <div class="table-responsive p-5">
-    <h2>Music Parts You Have</h2>
+   <div class="mx-3 d-flex">
+        <h1>Music Parts You Have</h1>
+    </div>
     <table class="table table-secondary table-hover">
         <thead>
         <tr>
@@ -78,7 +81,9 @@
 </div>
 
 <div class="table-responsive p-5">
-    <h2>Ongoing Order</h2>
+    <div class="mx-3 d-flex">
+        <h1>Ongoing Order</h1>
+    </div>
     <table class="table table-secondary table-hover">
         <thead>
         <tr>
@@ -101,7 +106,9 @@
 </div>
 
 <div class="table-responsive p-5">
-    <h2>Unfulfilled Ready Orders</h2>
+    <div class="mx-3 d-flex">
+        <h1>Unfulfilled Ready Orders</h1>
+    </div>
     <table class="table table-secondary table-hover">
         <thead>
         <tr>
@@ -125,7 +132,9 @@
 </div>
 
 <div class="table-responsive p-5">
-    <h2>Fulfilled Orders</h2>
+    <div class="mx-3 d-flex">
+        <h1>Fulfilled Orders</h1>
+    </div>
     <table class="table table-secondary table-hover">
         <thead>
         <tr>
