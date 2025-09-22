@@ -11,6 +11,68 @@
 </div>
 
 <h1 class="text-center pt-2">Member View</h1>
+    
+<div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <span th:text="${successMessage}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <span th:text="${errorMessage}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+        <h1 class="flex-fill">Instruments Available</h1>
+        <div class="align-self-center">
+          <a class="btn btn-outline-dark" th:href="@{/instrument/loan/new}">Add Instrument Loan</a>
+        </div>
+    </div>
+    <table class="table table-secondary table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Make</th>
+        </tr>
+        </thead>
+            <tbody class="table-group-divider">
+            <tr class="table-light" th:each="instrument : ${instrumentsNotLoaned}">
+                <td th:text="${instrument.id}"></td>
+                <td th:text="${instrument.name}"></td>
+                <td th:text="${instrument.serialNumber}"></td>
+                <td th:text="${instrument.make}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+        <h1 class="flex-fill">Current Instrument Loans</h1>
+    </div>
+    <table class="table table-secondary table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Instrument Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Returned</th>
+        </tr>
+        </thead>
+            <tbody class="table-group-divider">
+            <tr class="table-light" th:each="instrumentLoan : ${userInstrumentLoansNotReturned}">
+                <td th:text="${instrumentLoan.id}"></td>
+                <td th:text="${instrumentLoan.instrument.name}"></td>
+                <td th:text="${instrumentLoan.date}"></td>
+                <td th:text="${instrumentLoan.returned}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div th:replace="~{fragments/footer.html :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

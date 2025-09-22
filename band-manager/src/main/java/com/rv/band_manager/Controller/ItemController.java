@@ -10,12 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.rv.band_manager.Model.Instrument;
-import com.rv.band_manager.Model.Miscellaneous;
-import com.rv.band_manager.Model.MusicPart;
-import com.rv.band_manager.Model.MusicSet;
-import com.rv.band_manager.Service.InstrumentService;
-import com.rv.band_manager.Service.MiscellaneousService;
+import com.rv.band_manager.Model.*;
+import com.rv.band_manager.Service.*;
 
 import java.util.*;
 
@@ -27,16 +23,20 @@ import java.util.*;
 public class ItemController {
     private final InstrumentService instrumentService;
     private final MiscellaneousService miscellaneousService;
+    private final InstrumentLoanService instrumentLoanService;
 
     /**
      * Constructor to inject dependencies.
      *
      * @param instrumentService the instrument service for instrument-related operations.
      * @param miscellaneousService the miscellaneous service for miscellaneous-related operations.
+     * @oaram instrumentLoanService the instrument loan service for instrument-loan-related operation.
      */
-    public ItemController(InstrumentService instrumentService, MiscellaneousService miscellaneousService){
+    public ItemController(InstrumentService instrumentService, MiscellaneousService miscellaneousService,
+        InstrumentLoanService instrumentLoanService){
         this.instrumentService = instrumentService;
         this.miscellaneousService = miscellaneousService;
+        this.instrumentLoanService = instrumentLoanService;
     }
 
     /**
@@ -55,9 +55,13 @@ public class ItemController {
         }
         List<Instrument> instruments = instrumentService.getAllInstruments();
         List<Miscellaneous> miscellaneous = miscellaneousService.getAllMiscellaneous();
+        List<InstrumentLoan> instrumentLoansReturned = instrumentLoanService.getAllInstrumentLoansReturned();
+        List<InstrumentLoan> instrumentLoansNotReturned = instrumentLoanService.getAllInstrumentLoansNotReturned();
         // Add data to the model for committee member's items view
         model.addAttribute("instruments", instruments);
         model.addAttribute("miscellaneousItems", miscellaneous);
+        model.addAttribute("instrumentLoansReturned", instrumentLoansReturned);
+        model.addAttribute("instrumentLoansNotReturned", instrumentLoansNotReturned);
         return "committee-member/items"; // Return the view for committee members
     }
 

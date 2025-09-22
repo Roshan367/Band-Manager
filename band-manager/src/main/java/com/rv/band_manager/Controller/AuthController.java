@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.*;
 import com.rv.band_manager.Model.*;
 import com.rv.band_manager.Service.*;
@@ -22,17 +23,20 @@ import java.util.*;
 public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-
+    private final InstrumentService instrumentService;
+    private final InstrumentLoanService instrumentLoanService;
     /**
      * Constructor to inject required services.
      *
      * @param userService the user service for user-related operations.
      * @param authenticationManager the authentication manager for handling authentication.
      */
-    public AuthController(UserService userService,
-                          AuthenticationManager authenticationManager) {
+    public AuthController(UserService userService, AuthenticationManager authenticationManager,
+        InstrumentService instrumentService, InstrumentLoanService instrumentLoanService) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.instrumentService = instrumentService;
+        this.instrumentLoanService = instrumentLoanService;
     }
 
     /**
@@ -150,8 +154,55 @@ public class AuthController {
         if (authentication == null) {
             return "login"; // Redirect to login page if not authenticated
         }
+        Optional<User> userOpt = userService.getUserByEmail(authentication.getName());
+        User user = userOpt.get();
+        List<Instrument> instrumentsNotLoaned = instrumentLoanService.getInstrumentsNotLoaned();
+        List<InstrumentLoan> userInstrumentLoansNotReturned = instrumentLoanService.getUserInstrumentLoansNotReturned(user.getId());
         model.addAttribute("email", authentication.getName()); // Add user's email to the model
+        model.addAttribute("instrumentsNotLoaned", instrumentsNotLoaned);
+        model.addAttribute("userInstrumentLoansNotReturned", userInstrumentLoansNotReturned);
         return "loans"; // Returns the loans.html page
+    }
+
+    @GetMapping("/instrument/loan/new")
+    public String showInstrumentLoanForm(Model model) {
+        model.addAttribute("instrumentloan", new InstrumentLoan()); 
+        return "addInstrumentLoan"; 
+    }
+
+    @PostMapping("/instrument/loans")
+    public String addInstrumentLoan(InstrumentLoan instrumentLoan,
+        @RequestParam String serialNumber,
+        RedirectAttributes redirectAttributes) {
+      // Get the currently authenticated user
+      Authentication authentication = SecurityContextHolder.getContext()
+              .getAuthentication();
+      if (authentication == null) {
+          return "login"; // Redirect to login page if not authenticated
+      }
+      try {
+        // Save the new instrument loan to the database
+        User user = userService.getUserByEmail(authentication.getName()).get();
+        Optional<Instrument> instrumentOpt = instrumentService.getInstrumentBySerialNumber(serialNumber);
+        if(instrumentOpt.isPresent()){
+          Instrument instrument = instrumentOpt.get();
+          InstrumentLoan savedInstrumentLoan = instrumentLoanService.createInstrumentLoan(user, instrument);
+          redirectAttributes.addFlashAttribute("successMessage",
+                  "Instrument loan created successfully");
+          return "redirect:/loans"; 
+        }
+        else{
+          redirectAttributes.addFlashAttribute("errorMessage",
+              "Error finding instrument with that serial number");
+          return "redirect:instrument/loan/new";
+        }
+      } catch (Exception e) {
+        // Handle exceptions and log the error
+        System.out.println(e.getMessage());
+        redirectAttributes.addFlashAttribute("errorMessage",
+                "Error creating instrument loan" + e.getMessage());
+        return "redirect:instrument/loan/new"; // Redirect back to the add form
+      }
     }
 
     /**

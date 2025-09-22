@@ -10,6 +10,7 @@ public interface InstrumentService {
     Instrument saveInstrument(Instrument instrument);
     Instrument updateInstrument(Long id, Instrument updatedInstrument);
     Optional<Instrument> getInstrumentById(Long id);
+    Optional<Instrument> getInstrumentBySerialNumber(String serialNumber);
     void deleteInstrument(Long id);
 
 }

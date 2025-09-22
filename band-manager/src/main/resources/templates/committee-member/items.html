@@ -81,6 +81,35 @@
             </tbody>
         </table>
     </div>
+    
+    <div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+      <h1 class="flex-fill pt-4">Instrument Loans</h1>
+      <div class="align-self-center">
+      </div>
+    </div>
+
+      <table class="table table-secondary table-hover">
+          <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Instrument Name</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Returned</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr class="table-light" th:each="instrumentLoan : ${instrumentLoansNotReturned}">
+              <td th:text="${instrumentLoan.id}"></td>
+              <td th:text="${instrumentLoan.instrument.name}"></td>
+              <td th:text="${instrumentLoan.date}"></td>
+              <td th:text="${instrumentLoan.returned}"></td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+
+
 
     <div th:replace="~{fragments/footer.html :: footer}"></div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

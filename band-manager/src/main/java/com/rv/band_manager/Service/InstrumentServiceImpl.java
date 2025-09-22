@@ -2,7 +2,6 @@ package com.rv.band_manager.Service;
 
 import org.springframework.stereotype.Service;
 import com.rv.band_manager.Model.Instrument;
-import com.rv.band_manager.Model.MusicSet;
 import com.rv.band_manager.Repository.InstrumentRepository;
 import com.rv.band_manager.Repository.UserRepository;
 
@@ -54,6 +53,10 @@ public class InstrumentServiceImpl implements InstrumentService {
      */
     public Optional<Instrument> getInstrumentById(Long id) {
         return instrumentRepository.findById(id);
+    }
+
+    public Optional<Instrument> getInstrumentBySerialNumber(String serialNumber){
+      return instrumentRepository.findBySerialNumber(serialNumber);
     }
 
     /**
