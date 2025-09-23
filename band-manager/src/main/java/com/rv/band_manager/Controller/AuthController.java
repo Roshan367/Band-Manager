@@ -170,6 +170,39 @@ public class AuthController {
         return "addInstrumentLoan"; 
     }
 
+    @GetMapping("/instrument-loan/{instrumentLoanId}")
+    public String showInstrumentLoan(@PathVariable Long instrumentLoanId, Model model){
+      InstrumentLoan instrumentLoan = instrumentLoanService.getInstrumentLoanById(instrumentLoanId).get();
+      model.addAttribute(instrumentLoan);
+      return "instrument-loan";
+    }
+
+    @PostMapping("/instrument-loan/return")
+    public String returnInstrmuentLoan(@RequestParam Long instrumentLoanId,
+        RedirectAttributes redirectAttributes){
+        try {
+            Optional<InstrumentLoan> instrumentLoanOpt = instrumentLoanService.getInstrumentLoanById(instrumentLoanId);
+            if (instrumentLoanOpt.isPresent()) {
+                InstrumentLoan instrumentLoan = instrumentLoanOpt.get();
+                InstrumentLoan updatedInstrumentLoan = instrumentLoanService.returnInstrumentLoan(instrumentLoan);
+                if (updatedInstrumentLoan == null) {
+                    redirectAttributes.addFlashAttribute("errorMessage",
+                            "Error returning instrument loan");
+                } else {
+                    redirectAttributes.addFlashAttribute("successMessage",
+                            "instrument loan returned");
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Error");
+            }
+        } catch (Exception e) {
+            // Handle exceptions and add error details to redirect attributes
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+      return "/loans";
+    }
+
     @PostMapping("/instrument/loans")
     public String addInstrumentLoan(InstrumentLoan instrumentLoan,
         @RequestParam String serialNumber,

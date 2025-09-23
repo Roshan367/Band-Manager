@@ -14,7 +14,7 @@ public interface InstrumentLoanService {
     List<InstrumentLoan> getUserInstrumentLoansNotReturned(Long userId);
     List<InstrumentLoan> getUserInstrumentLoansReturned(Long userId);
     InstrumentLoan createInstrumentLoan(User user, Instrument instrument);
-    InstrumentLoan returnInstrumentLoan(Long id, InstrumentLoan updatedInstrumentLoan);
+    InstrumentLoan returnInstrumentLoan(InstrumentLoan updatedInstrumentLoan);
     Optional<InstrumentLoan> getInstrumentLoanById(Long id);
     void deleteInstrumentLoan(Long id);
     List<InstrumentLoan> getInstrumentLoansByUserId(Long userId);

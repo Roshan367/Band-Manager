@@ -78,10 +78,7 @@ public class InstrumentLoanServiceImpl implements InstrumentLoanService {
      * @return the returned instrument loan
      * @throws IllegalArgumentException if the instrument loan is not found
      */
-    public InstrumentLoan returnInstrumentLoan(Long id, InstrumentLoan returnedInstrumentLoan) {
-        InstrumentLoan instrumentLoan = instrumentLoanRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Instrument loan not found"));
-
+    public InstrumentLoan returnInstrumentLoan(InstrumentLoan instrumentLoan) {
         instrumentLoan.setReturned(true);
         return instrumentLoanRepository.save(instrumentLoan);
     }

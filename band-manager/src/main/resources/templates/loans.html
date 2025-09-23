@@ -64,7 +64,9 @@
         </thead>
             <tbody class="table-group-divider">
             <tr class="table-light" th:each="instrumentLoan : ${userInstrumentLoansNotReturned}">
-                <td th:text="${instrumentLoan.id}"></td>
+                <th scope="col">
+                  <a th:href="@{instrument-loan/{id}(id=${instrumentLoan.id})}" th:text="${instrumentLoan.id}">1</a>
+                </th>
                 <td th:text="${instrumentLoan.instrument.name}"></td>
                 <td th:text="${instrumentLoan.date}"></td>
                 <td th:text="${instrumentLoan.returned}"></td>
