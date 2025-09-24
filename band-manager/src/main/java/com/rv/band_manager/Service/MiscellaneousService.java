@@ -10,5 +10,7 @@ public interface MiscellaneousService {
     Miscellaneous saveMiscellaneous(Miscellaneous item);
     Miscellaneous updateMiscellaneous(Long id, Miscellaneous updatedItem);
     Optional<Miscellaneous> getMiscellaneousById(Long id);
+    Optional<Miscellaneous> getMiscellaneousByNameAndMake(String name, String make);
+    void setAvailableMiscellaneousQuantity();
     void deleteMiscellaneous(Long id);
 }

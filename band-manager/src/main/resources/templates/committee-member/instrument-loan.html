@@ -26,11 +26,7 @@
                 <p>Date Loaned - <span th:text="${instrumentLoan.date}"></span></p>
                 <p>Returned - <span th:text="${instrumentLoan.returned}"></span></p>
                 <div class="d-flex justify-content-between mt-4">
-                  <form th:action="@{/instrument-loan/return}" th:method="post">
-                    <input type="hidden" name="instrumentLoanId" th:value="${instrumentLoan.id}"/>
-                    <button type="submit" class="btn btn-outline-dark">Return Instrument Loan</button>
-                  </form>
-                  <a class="btn btn-outline-dark" th:href="@{/loans}">Back to Loans</a>
+                  <a class="btn btn-outline-dark" th:href="@{/committee-member/items}">Back to Items</a>
                 </div>
             </div>
         </div>
@@ -38,5 +34,6 @@
     </div>
 
 </div>
+<script th:src="@{/js/committeeMember.js}"></script>
 </body>
 </html>

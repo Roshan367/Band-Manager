@@ -100,7 +100,9 @@
           </thead>
           <tbody class="table-group-divider">
           <tr class="table-light" th:each="instrumentLoan : ${instrumentLoansNotReturned}">
-              <td th:text="${instrumentLoan.id}"></td>
+              <th scope="col">
+                <a th:href="@{/committee-member/instrument-loan/{id}(id=${instrumentLoan.id})}" th:text="${instrumentLoan.id}">1</a>
+              </th>
               <td th:text="${instrumentLoan.instrument.name}"></td>
               <td th:text="${instrumentLoan.date}"></td>
               <td th:text="${instrumentLoan.returned}"></td>
@@ -127,10 +129,79 @@
           </thead>
           <tbody class="table-group-divider">
           <tr class="table-light" th:each="instrumentLoan : ${instrumentLoansReturned}">
-              <td th:text="${instrumentLoan.id}"></td>
+              <th scope="col">
+                <a th:href="@{/committee-member/instrument-loan/{id}(id=${instrumentLoan.id})}" th:text="${instrumentLoan.id}">1</a>
+              </th>
               <td th:text="${instrumentLoan.instrument.name}"></td>
               <td th:text="${instrumentLoan.date}"></td>
               <td th:text="${instrumentLoan.returned}"></td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+
+
+    <div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+      <h1 class="flex-fill pt-4">Active Miscellaneous Loans</h1>
+      <div class="align-self-center">
+      </div>
+    </div>
+
+      <table class="table table-secondary table-hover">
+          <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Miscellaneous Name</th>
+              <th scope="col">Miscellaneous Make</th>
+              <th scope="col">Miscellaneous Quantity</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Returned</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr class="table-light" th:each="miscellaneousLoan : ${miscellaneousLoansNotReturned}">
+              <th scope="col">
+              <a th:href="@{/committee-member/miscellaneous-loan/{id}(id=${miscellaneousLoan.id})}" th:text="${miscellaneousLoan.id}">1</a>
+              </th>
+              <td th:text="${miscellaneousLoan.miscellaneous.name}"></td>
+              <td th:text="${miscellaneousLoan.miscellaneous.make}"></td>
+              <td th:text="${miscellaneousLoan.quantity}"></td>
+              <td th:text="${miscellaneousLoan.date}"></td>
+              <td th:text="${miscellaneousLoan.returned}"></td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+
+    <div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+      <h1 class="flex-fill pt-4">Returned Miscellaneous Loans</h1>
+      <div class="align-self-center">
+      </div>
+    </div>
+
+      <table class="table table-secondary table-hover">
+          <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Miscellaneous Name</th>
+              <th scope="col">Miscellaneous Make</th>
+              <th scope="col">Miscellaneous Quantity</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Returned</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr class="table-light" th:each="miscellaneousLoan : ${miscellaneousLoansReturned}">
+              <th scope="col">
+                <a th:href="@{/committee-member/miscellaneous-loan/{id}(id=${miscellaneousLoan.id})}" th:text="${miscellaneousLoan.id}">1</a>
+              </th>
+              <td th:text="${miscellaneousLoan.miscellaneous.name}"></td>
+              <td th:text="${miscellaneousLoan.miscellaneous.make}"></td>
+              <td th:text="${miscellaneousLoan.quantity}"></td>
+              <td th:text="${miscellaneousLoan.date}"></td>
+              <td th:text="${miscellaneousLoan.returned}"></td>
           </tr>
           </tbody>
       </table>

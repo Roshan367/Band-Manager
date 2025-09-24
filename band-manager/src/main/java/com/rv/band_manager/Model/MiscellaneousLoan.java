@@ -65,10 +65,10 @@ public class MiscellaneousLoan {
     public void setMiscellaneous(Miscellaneous miscellaneous) {
         this.miscellaneous = miscellaneous; // Sets the miscellaneous item being loaned
     }
-    public LocalDate getLoanDate() {
+    public LocalDate getDate() {
         return date; // Returns the loan date
     }
-    public void setLoanDate(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date; // Sets the loan date
     }
     public Integer getQuantity() {

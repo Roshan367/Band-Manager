@@ -24,7 +24,7 @@ public class ItemController {
     private final InstrumentService instrumentService;
     private final MiscellaneousService miscellaneousService;
     private final InstrumentLoanService instrumentLoanService;
-
+    private final MiscellaneousLoanService miscellaneousLoanService;
     /**
      * Constructor to inject dependencies.
      *
@@ -33,10 +33,11 @@ public class ItemController {
      * @oaram instrumentLoanService the instrument loan service for instrument-loan-related operation.
      */
     public ItemController(InstrumentService instrumentService, MiscellaneousService miscellaneousService,
-        InstrumentLoanService instrumentLoanService){
+        InstrumentLoanService instrumentLoanService, MiscellaneousLoanService miscellaneousLoanService){
         this.instrumentService = instrumentService;
         this.miscellaneousService = miscellaneousService;
         this.instrumentLoanService = instrumentLoanService;
+        this.miscellaneousLoanService = miscellaneousLoanService;
     }
 
     /**
@@ -57,11 +58,15 @@ public class ItemController {
         List<Miscellaneous> miscellaneous = miscellaneousService.getAllMiscellaneous();
         List<InstrumentLoan> instrumentLoansReturned = instrumentLoanService.getAllInstrumentLoansReturned();
         List<InstrumentLoan> instrumentLoansNotReturned = instrumentLoanService.getAllInstrumentLoansNotReturned();
+        List<MiscellaneousLoan> miscellaneousLoansReturned = miscellaneousLoanService.getAllMiscellaneousLoansReturned();
+        List<MiscellaneousLoan> miscellaneousLoansNotReturned = miscellaneousLoanService.getAllMiscellaneousLoansNotReturned();
         // Add data to the model for committee member's items view
         model.addAttribute("instruments", instruments);
         model.addAttribute("miscellaneousItems", miscellaneous);
         model.addAttribute("instrumentLoansReturned", instrumentLoansReturned);
         model.addAttribute("instrumentLoansNotReturned", instrumentLoansNotReturned);
+        model.addAttribute("miscellaneousLoansReturned", miscellaneousLoansReturned);
+        model.addAttribute("miscellaneousLoansNotReturned", miscellaneousLoansNotReturned);
         return "committee-member/items"; // Return the view for committee members
     }
 
@@ -147,6 +152,25 @@ public class ItemController {
         }
 
         return "/committee-member/instrument"; // Return the view for the instrument details
+    }
+
+    @GetMapping("/instrument-loan/{id}")
+    public String getInstrumentLoanById(@PathVariable Long id, Model model){
+      // Get the currently authenticated user
+      Authentication authentication = SecurityContextHolder.getContext()
+              .getAuthentication();
+      if (authentication == null) {
+          return "login"; // Redirect to login page if not authenticated
+      }
+      Optional<InstrumentLoan> instrumentLoan = instrumentLoanService.getInstrumentLoanById(id);
+
+      if(instrumentLoan.isPresent()){
+        model.addAttribute("instrumentLoan", instrumentLoan.get());
+      } else{
+        model.addAttribute("error", "Instrument loan not found");
+      }
+
+      return "/committee-member/instrument-loan";
     }
 
     /**
@@ -245,6 +269,24 @@ public class ItemController {
         return "committee-member/addMiscellaneous"; // Return the view for adding a new miscellaneous
     }
 
+    @GetMapping("/miscellaneous-loan/{id}")
+    public String getMiscellaneousLoanById(@PathVariable Long id, Model model){
+      // Get the currently authenticated user
+      Authentication authentication = SecurityContextHolder.getContext()
+              .getAuthentication();
+      if (authentication == null) {
+          return "login"; // Redirect to login page if not authenticated
+      }
+      Optional<MiscellaneousLoan> miscellaneousLoan = miscellaneousLoanService.getMiscellaneousLoanById(id);
+
+      if(miscellaneousLoan.isPresent()){
+        model.addAttribute("miscellaneousLoan", miscellaneousLoan.get());
+      } else{
+        model.addAttribute("error", "Miscellaneous loan not found");
+      }
+
+      return "/committee-member/miscellaneous-loan";
+    }
     /**
      * Adds a new miscellaneous.
      *

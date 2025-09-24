@@ -25,6 +25,8 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final InstrumentService instrumentService;
     private final InstrumentLoanService instrumentLoanService;
+    private final MiscellaneousService miscellaneousService;
+    private final MiscellaneousLoanService miscellaneousLoanService;
     /**
      * Constructor to inject required services.
      *
@@ -32,11 +34,14 @@ public class AuthController {
      * @param authenticationManager the authentication manager for handling authentication.
      */
     public AuthController(UserService userService, AuthenticationManager authenticationManager,
-        InstrumentService instrumentService, InstrumentLoanService instrumentLoanService) {
+        InstrumentService instrumentService, InstrumentLoanService instrumentLoanService,
+        MiscellaneousService miscellaneousService, MiscellaneousLoanService miscellaneousLoanService) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.instrumentService = instrumentService;
         this.instrumentLoanService = instrumentLoanService;
+        this.miscellaneousService = miscellaneousService;
+        this.miscellaneousLoanService = miscellaneousLoanService;
     }
 
     /**
@@ -158,9 +163,14 @@ public class AuthController {
         User user = userOpt.get();
         List<Instrument> instrumentsNotLoaned = instrumentLoanService.getInstrumentsNotLoaned();
         List<InstrumentLoan> userInstrumentLoansNotReturned = instrumentLoanService.getUserInstrumentLoansNotReturned(user.getId());
+        List<Miscellaneous> miscellaneousNotLoaned = miscellaneousLoanService.getMiscellaneousNotLoaned();
+        List<MiscellaneousLoan> userMiscellaneousLoansNotReturned = miscellaneousLoanService.getUserMiscellaneousLoansNotReturned(user.getId());
+        miscellaneousService.setAvailableMiscellaneousQuantity();
         model.addAttribute("email", authentication.getName()); // Add user's email to the model
         model.addAttribute("instrumentsNotLoaned", instrumentsNotLoaned);
         model.addAttribute("userInstrumentLoansNotReturned", userInstrumentLoansNotReturned);
+        model.addAttribute("miscellaneousNotLoaned", miscellaneousNotLoaned);
+        model.addAttribute("userMiscellaneousLoansNotReturned", userMiscellaneousLoansNotReturned);
         return "loans"; // Returns the loans.html page
     }
 
@@ -237,6 +247,87 @@ public class AuthController {
         return "redirect:instrument/loan/new"; // Redirect back to the add form
       }
     }
+
+
+    @GetMapping("/miscellaneous/loan/new")
+    public String showMiscellaneousLoanForm(Model model) {
+        model.addAttribute("miscellaneousloan", new MiscellaneousLoan()); 
+        return "addMiscellaneousLoan"; 
+    }
+
+    @GetMapping("/miscellaneous-loan/{miscellaneousLoanId}")
+    public String showMiscellaneousLoan(@PathVariable Long miscellaneousLoanId, Model model){
+      MiscellaneousLoan miscellaneousLoan = miscellaneousLoanService.getMiscellaneousLoanById(miscellaneousLoanId).get();
+      model.addAttribute(miscellaneousLoan);
+      return "miscellaneous-loan";
+    }
+
+    @PostMapping("/miscellaneous-loan/return")
+    public String returnMiscellaneousLoan(@RequestParam Long miscellaneousLoanId,
+        RedirectAttributes redirectAttributes){
+        try {
+            Optional<MiscellaneousLoan> miscellaneousLoanOpt = miscellaneousLoanService.getMiscellaneousLoanById(miscellaneousLoanId);
+            if (miscellaneousLoanOpt.isPresent()) {
+                MiscellaneousLoan miscellaneousLoan = miscellaneousLoanOpt.get();
+                MiscellaneousLoan updatedMiscellaneousLoan = miscellaneousLoanService.returnMiscellaneousLoan(miscellaneousLoan);
+                if (updatedMiscellaneousLoan == null) {
+                    redirectAttributes.addFlashAttribute("errorMessage",
+                            "Error returning miscellaneous loan");
+                } else {
+
+                    miscellaneousService.setAvailableMiscellaneousQuantity();
+                    redirectAttributes.addFlashAttribute("successMessage",
+                            "miscellaneous loan returned");
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Error");
+            }
+        } catch (Exception e) {
+            // Handle exceptions and add error details to redirect attributes
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+      return "/loans";
+    }
+
+    @PostMapping("/miscellaneous/loans")
+    public String addMiscellaneousLoan(MiscellaneousLoan miscellaneousLoan,
+        @RequestParam String name,
+        @RequestParam String make,
+        @RequestParam Integer quantity,
+        RedirectAttributes redirectAttributes) {
+      // Get the currently authenticated user
+      Authentication authentication = SecurityContextHolder.getContext()
+              .getAuthentication();
+      if (authentication == null) {
+          return "login"; // Redirect to login page if not authenticated
+      }
+      try {
+        // Save the new instrument loan to the database
+        User user = userService.getUserByEmail(authentication.getName()).get();
+        Optional<Miscellaneous> miscellaneousOpt = miscellaneousService.getMiscellaneousByNameAndMake(name, make);
+        if(miscellaneousOpt.isPresent()){
+          Miscellaneous miscellaneous = miscellaneousOpt.get();
+          MiscellaneousLoan savedMiscellaneousLoan = miscellaneousLoanService.createMiscellaneousLoan(user, miscellaneous, quantity);
+          redirectAttributes.addFlashAttribute("successMessage",
+                  "Miscellaneous loan created successfully");
+          return "redirect:/loans"; 
+        }
+        else{
+          redirectAttributes.addFlashAttribute("errorMessage",
+              "Error finding miscellaneous with that name and make");
+          return "redirect:miscellaneous/loan/new";
+        }
+      } catch (Exception e) {
+        // Handle exceptions and log the error
+        System.out.println(e.getMessage());
+        redirectAttributes.addFlashAttribute("errorMessage",
+                "Error creating miscellaneous loan" + e.getMessage());
+        return "redirect:miscellaneous/loan/new"; // Redirect back to the add form
+      }
+    }
+
+
 
     /**
      * Renders the parent overview page for director.

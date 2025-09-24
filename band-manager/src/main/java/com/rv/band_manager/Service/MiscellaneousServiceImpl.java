@@ -5,6 +5,7 @@ import com.rv.band_manager.Model.Miscellaneous;
 import com.rv.band_manager.Model.MiscellaneousLoan;
 import com.rv.band_manager.Model.User;
 import com.rv.band_manager.Repository.MiscellaneousRepository;
+import com.rv.band_manager.Repository.MiscellaneousLoanRepository;
 import com.rv.band_manager.Repository.UserRepository;
 
 import java.util.List;
@@ -18,14 +19,17 @@ import java.util.Optional;
 public class MiscellaneousServiceImpl implements MiscellaneousService {
 
     private final MiscellaneousRepository miscellaneousRepository;
-
+    private final MiscellaneousLoanRepository miscellaneousLoanRepository;
     /**
      * Constructs a new instance of MiscellaneousServiceImpl with the specified repository.
      *
      * @param miscellaneousRepository the repository used for miscellaneous item data access
      */
-    public MiscellaneousServiceImpl(MiscellaneousRepository miscellaneousRepository) {
-        this.miscellaneousRepository = miscellaneousRepository;}
+    public MiscellaneousServiceImpl(MiscellaneousRepository miscellaneousRepository,
+        MiscellaneousLoanRepository miscellaneousLoanRepository) {
+        this.miscellaneousRepository = miscellaneousRepository;
+        this.miscellaneousLoanRepository = miscellaneousLoanRepository;
+    }
 
     /**
      * Retrieves all miscellaneous items from the repository.
@@ -34,6 +38,15 @@ public class MiscellaneousServiceImpl implements MiscellaneousService {
      */
     public List<Miscellaneous> getAllMiscellaneous() {
         return miscellaneousRepository.findAll();
+    }
+
+    public void setAvailableMiscellaneousQuantity(){
+      List<Miscellaneous> items = miscellaneousRepository.findAll();
+      for (Miscellaneous item : items) {
+          Integer loaned = miscellaneousLoanRepository.sumLoanedQuantityByMiscellaneousId(item.getId());
+          if (loaned == null) loaned = 0;
+          item.setAvailableQuantity(item.getQuantity() - loaned);
+      }
     }
 
     /**
@@ -53,6 +66,10 @@ public class MiscellaneousServiceImpl implements MiscellaneousService {
      * @return an Optional containing the miscellaneous item if found, or empty if not
      */
     public Optional<Miscellaneous> getMiscellaneousById(Long id){return miscellaneousRepository.findById(id);}
+
+    public Optional<Miscellaneous> getMiscellaneousByNameAndMake(String name, String make){
+      return miscellaneousRepository.findByNameAndMake(name, make);
+    }
 
     /**
      * Updates an existing miscellaneous item in the repository.

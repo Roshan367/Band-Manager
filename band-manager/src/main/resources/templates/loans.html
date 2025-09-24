@@ -76,6 +76,69 @@
     </div>
 </div>
 
+<div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+        <h1 class="flex-fill">Miscellaneous Available</h1>
+        <div class="align-self-center">
+          <a class="btn btn-outline-dark" th:href="@{/miscellaneous/loan/new}">Add Miscellaneous Loan</a>
+        </div>
+    </div>
+    <table class="table table-secondary table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Make</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Available Quantity</th>
+            <th scope="col">For Specific Instrument</th>
+        </tr>
+        </thead>
+            <tbody class="table-group-divider">
+            <tr class="table-light" th:each="miscellaneous : ${miscellaneousNotLoaned}">
+                <td th:text="${miscellaneous.id}"></td>
+                <td th:text="${miscellaneous.name}"></td>
+                <td th:text="${miscellaneous.make}"></td>
+                <td th:text="${miscellaneous.quantity}"></td>
+                <td th:text="${miscellaneous.availableQuantity}"></td>
+                <td th:text="${miscellaneous.specificForInstrument}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="table-responsive px-5 py-2">
+    <div class="mx-3 d-flex">
+        <h1 class="flex-fill">Current Miscellaneous Loans</h1>
+    </div>
+    <table class="table table-secondary table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Miscellaneous Name</th>
+            <th scope="col">Miscellaneous Make</th>
+            <th scope="col">Miscellaneous Quantity</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Returned</th>
+        </tr>
+        </thead>
+            <tbody class="table-group-divider">
+            <tr class="table-light" th:each="miscellaneousLoan : ${userMiscellaneousLoansNotReturned}">
+                <th scope="col">
+                  <a th:href="@{miscellaneous-loan/{id}(id=${miscellaneousLoan.id})}" th:text="${miscellaneousLoan.id}">1</a>
+                </th>
+                <td th:text="${miscellaneousLoan.miscellaneous.name}"></td>
+                <td th:text="${miscellaneousLoan.miscellaneous.make}"></td>
+                <td th:text="${miscellaneousLoan.quantity}"></td>
+                <td th:text="${miscellaneousLoan.date}"></td>
+                <td th:text="${miscellaneousLoan.returned}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div th:replace="~{fragments/footer.html :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

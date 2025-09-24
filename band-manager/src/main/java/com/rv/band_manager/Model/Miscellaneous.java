@@ -34,6 +34,9 @@ public class Miscellaneous {
     // Optional field specifying if the item is specific to an instrument
     private String specificForInstrument;
 
+    @Transient
+    private Integer availableQuantity;
+
     // One-to-many relationship linking this item to its associated loans, with cascading operations and orphan removal
     @OneToMany(mappedBy = "miscellaneous", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MiscellaneousLoan> miscellaneousLoan = new HashSet<>();
@@ -87,6 +90,14 @@ public class Miscellaneous {
     }
     public void setSpecificForInstrument(String specificForInstrument) {
         this.specificForInstrument = specificForInstrument; // Updates the instrument specificity of the item
+    }
+
+    public Integer getAvailableQuantity(){
+      return availableQuantity;
+    }
+
+    public void setAvailableQuantity(Integer availableQuantity){
+      this.availableQuantity = availableQuantity;
     }
 
     public Set<MiscellaneousLoan> getMiscellaneousLoan() {
