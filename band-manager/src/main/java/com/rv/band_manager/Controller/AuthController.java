@@ -201,6 +201,7 @@ public class AuthController {
                 } else {
                     redirectAttributes.addFlashAttribute("successMessage",
                             "instrument loan returned");
+                    return "redirect:/loans";
                 }
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage",
@@ -229,10 +230,17 @@ public class AuthController {
         Optional<Instrument> instrumentOpt = instrumentService.getInstrumentBySerialNumber(serialNumber);
         if(instrumentOpt.isPresent()){
           Instrument instrument = instrumentOpt.get();
-          InstrumentLoan savedInstrumentLoan = instrumentLoanService.createInstrumentLoan(user, instrument);
-          redirectAttributes.addFlashAttribute("successMessage",
-                  "Instrument loan created successfully");
-          return "redirect:/loans"; 
+          if(instrumentLoanService.instrumentInLoan(instrument)){
+            redirectAttributes.addFlashAttribute("errorMessage",
+                "Instrument is already in loan");
+            return "redirect:/instrument/loan/new";
+          }
+          else{
+            InstrumentLoan savedInstrumentLoan = instrumentLoanService.createInstrumentLoan(user, instrument);
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Instrument loan created successfully");
+            return "redirect:/loans"; 
+          }
         }
         else{
           redirectAttributes.addFlashAttribute("errorMessage",
@@ -278,6 +286,7 @@ public class AuthController {
                     miscellaneousService.setAvailableMiscellaneousQuantity();
                     redirectAttributes.addFlashAttribute("successMessage",
                             "miscellaneous loan returned");
+                    return "redirect:/loans";
                 }
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage",
@@ -308,22 +317,30 @@ public class AuthController {
         Optional<Miscellaneous> miscellaneousOpt = miscellaneousService.getMiscellaneousByNameAndMake(name, make);
         if(miscellaneousOpt.isPresent()){
           Miscellaneous miscellaneous = miscellaneousOpt.get();
-          MiscellaneousLoan savedMiscellaneousLoan = miscellaneousLoanService.createMiscellaneousLoan(user, miscellaneous, quantity);
-          redirectAttributes.addFlashAttribute("successMessage",
-                  "Miscellaneous loan created successfully");
-          return "redirect:/loans"; 
+          miscellaneousService.setAvailableMiscellaneousQuantity();
+          if(quantity > miscellaneous.getAvailableQuantity()){
+            redirectAttributes.addFlashAttribute("errorMessage",
+                "Error quantity is higher than available quantity");
+            return "redirect:/miscellaneous/loan/new";
+          }
+          else{
+            MiscellaneousLoan savedMiscellaneousLoan = miscellaneousLoanService.createMiscellaneousLoan(user, miscellaneous, quantity);
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Miscellaneous loan created successfully");
+            return "redirect:/loans"; 
+          }
         }
         else{
           redirectAttributes.addFlashAttribute("errorMessage",
               "Error finding miscellaneous with that name and make");
-          return "redirect:miscellaneous/loan/new";
+          return "redirect:/miscellaneous/loan/new";
         }
       } catch (Exception e) {
         // Handle exceptions and log the error
         System.out.println(e.getMessage());
         redirectAttributes.addFlashAttribute("errorMessage",
                 "Error creating miscellaneous loan" + e.getMessage());
-        return "redirect:miscellaneous/loan/new"; // Redirect back to the add form
+        return "redirect:/miscellaneous/loan/new"; // Redirect back to the add form
       }
     }
 

@@ -150,4 +150,13 @@ public class InstrumentLoanServiceImpl implements InstrumentLoanService {
         instrumentLoanRepository.delete(instrumentLoan);
     }
 
+    public boolean instrumentInLoan(Instrument instrument){
+      List<InstrumentLoan> instrumentLoans = instrumentLoanRepository.findByReturned(false);
+      for(InstrumentLoan instrumentLoan : instrumentLoans){
+        if(instrumentLoan.getInstrument().equals(instrument)){
+          return true;
+        }
+      }
+      return false;
+    }
 }

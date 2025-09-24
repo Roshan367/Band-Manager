@@ -162,7 +162,7 @@
           <tbody class="table-group-divider">
           <tr class="table-light" th:each="miscellaneousLoan : ${miscellaneousLoansNotReturned}">
               <th scope="col">
-              <a th:href="@{/committee-member/miscellaneous-loan/{id}(id=${miscellaneousLoan.id})}" th:text="${miscellaneousLoan.id}">1</a>
+                <a th:href="@{/committee-member/miscellaneous-loan/{id}(id=${miscellaneousLoan.id})}" th:text="${miscellaneousLoan.id}">1</a>
               </th>
               <td th:text="${miscellaneousLoan.miscellaneous.name}"></td>
               <td th:text="${miscellaneousLoan.miscellaneous.make}"></td>

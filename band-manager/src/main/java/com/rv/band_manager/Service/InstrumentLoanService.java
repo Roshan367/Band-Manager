@@ -20,4 +20,5 @@ public interface InstrumentLoanService {
     List<InstrumentLoan> getInstrumentLoansByUserId(Long userId);
     List<Instrument> getInstrumentsNotLoaned();
     List<Instrument> getInstrumentsLoaned();
+    boolean instrumentInLoan(Instrument instrument);
 }
