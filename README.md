@@ -13,4 +13,44 @@ Contains both user authentication and authorisation for security. Additionally, 
   - Gradle 9.1.0
   - PostgreSQL 17.6
   - Java (openJDK) 25.0.1
-  - 
+
+Make sure to setup your own PosgreSQL database and setup the .env file to work with the application.properties file.
+
+```
+.env
+DB_USER=username
+DB_PASSWORD=password
+```
+```
+application.properties
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
+```
+
+Now add the senior-band and training-band values to the bands table in the database.
+
+`sudo -iu postgres`
+
+`psql`
+
+`\c band_manager_db_name`
+
+```
+-- Add the senior band
+INSERT INTO bands (name)
+VALUES ('senior-band');
+
+-- Add the training band
+INSERT INTO bands (name)
+VALUES ('training-band');
+```
+
+```
+-- Add committee member role
+INSERT INTO users (user_id, roles)
+VALUES (1, 'COMMITTEE_MEMBER');
+
+-- Add director role
+INSERT INTO users (user_id, roles)
+VALUES (1, 'DIRECTOR');
+```
