@@ -365,26 +365,6 @@ public class AuthController {
     }
 
     /**
-     * Renders the loans page for a specific child.
-     *
-     * @param childId the ID of the child whose loans to display.
-     * @param model the model to add child attributes for rendering.
-     * @return the name of the HTML template.
-     */
-    @GetMapping("/child/{childId}/loans")
-    public String loans(@PathVariable Long childId, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
-        Optional<User> childOpt = userService.getUserById(childId); // Fetch child by ID
-        if (childOpt.isPresent()) {
-            User child = childOpt.get();
-            model.addAttribute("fullName", child.getFullName()); // Add child details to the model
-            model.addAttribute("child", child);
-        }
-        return "/child/loans"; // Returns the child's loans page
-    }
-
-    /**
      * Renders the form to add a new child.
      *
      * @param model the model to add an empty user object for the form.
