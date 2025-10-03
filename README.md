@@ -9,3 +9,8 @@ There are three main user-types, Director, Committee Member and Member. Director
 Contains both user authentication and authorisation for security. Additionally, parametrised queries are used to prevent SQL-injection.
 
 ## Setup
+- Requirements:
+  - Gradle 9.1.0
+  - PostgreSQL 17.6
+  - Java (openJDK) 25.0.1
+  - 
