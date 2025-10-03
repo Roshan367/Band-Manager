@@ -45,6 +45,14 @@ INSERT INTO bands (name)
 VALUES ('training-band');
 ```
 
+Now that the bands are added start the application with
+
+`./gradlew bootRun`
+
+Now we sign up and exit the application
+
+With this created user we can now give them committee member and director permissions (This is only necessary for the original director user)
+
 ```
 -- Add committee member role
 INSERT INTO users (user_id, roles)
